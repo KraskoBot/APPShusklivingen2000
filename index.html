@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Stifinn - planlegg fellesturer etter vær, natur og når gruppen kan reise.">
+  <title>Stifinn | Tur sammen, når været er best</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Stifinn hjem">
+      <span class="brand-mark">↗</span>
+      <span>stifinn</span>
+    </a>
+    <nav class="main-nav" aria-label="Hovedmeny">
+      <a href="#planlegg">Planlegg tur</a>
+      <a href="#slik-fungerer">Slik fungerer det</a>
+      <a href="#inspirasjon">Inspirasjon</a>
+    </nav>
+    <a class="header-action" href="#planlegg">Start planlegging <span>→</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Fellesturer med bedre timing</p>
+        <h1>God tur blir<br><em>bedre sammen.</em></h1>
+        <p class="hero-text">Samle gjengen, velg når dere kan dra, og finn dagen med størst sjanse for godt turvær.</p>
+        <a class="primary-button" href="#planlegg">Planlegg en fellestur <span>↗</span></a>
+        <div class="hero-note">
+          <span class="avatar-stack" aria-hidden="true"><i>ML</i><i>AS</i><i>JK</i></span>
+          <span><strong>2 400+</strong> turfolk planlegger sammen</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Turgruppe ved et fjellvann">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=85" alt="Fjell og tursti ved et rolig vann">
+        <div class="weather-stamp">
+          <span class="sun-icon">☼</span>
+          <span><strong>Turvær i sikte</strong><small>Velg dato med omtanke</small></span>
+        </div>
+        <span class="image-caption">Jotunheimen · Norge</span>
+      </div>
+    </section>
+
+    <section class="planning-section" id="planlegg">
+      <div class="section-intro">
+        <p class="eyebrow">01 / Finn riktig dag</p>
+        <h2>Planlegg på<br><em>gruppens premisser.</em></h2>
+        <p>Fleksibilitet gir flere muligheter. Fortell oss hvor dere vil, når dere kan og hva slags tur dere ser for dere.</p>
+      </div>
+      <form class="trip-form" action="#" method="get">
+        <div class="form-heading"><span>Ny fellestur</span><span class="form-status">● Klar til å starte</span></div>
+        <label for="destination">Hvor vil dere gå?</label>
+        <div class="input-shell"><span class="input-icon">⌖</span><input id="destination" name="destination" type="text" placeholder="F.eks. Besseggen, Jotunheimen"></div>
+        <div class="form-grid">
+          <div>
+            <label for="from-date">Tidligste dato</label>
+            <input id="from-date" name="from-date" type="date">
+          </div>
+          <div>
+            <label for="to-date">Seneste dato</label>
+            <input id="to-date" name="to-date" type="date">
+          </div>
+        </div>
+        <div class="flexible-callout"><span class="spark">✦</span><span><strong>Fleksible datoer</strong><small>Vi ser etter den beste værmuligheten i perioden.</small></span><input type="checkbox" id="flexible" name="flexible" checked><label class="toggle" for="flexible"><span></span></label></div>
+        <button class="form-button" type="submit">Se mulige turdager <span>→</span></button>
+      </form>
+    </section>
+
+    <section class="feature-strip" id="slik-fungerer">
+      <div class="feature"><span class="feature-number">01</span><div><h3>Samle gruppen</h3><p>Inviter venner og finn en periode alle kan.</p></div></div>
+      <div class="feature"><span class="feature-number">02</span><div><h3>Følg værvinduet</h3><p>Se hvilke dager som lover mest sol og minst vind.</p></div></div>
+      <div class="feature"><span class="feature-number">03</span><div><h3>Kom dere ut</h3><p>Bestem dere sammen og nyt turen.</p></div></div>
+    </section>
+
+    <section class="inspiration" id="inspirasjon">
+      <div class="inspiration-heading"><div><p class="eyebrow">02 / Turinspirasjon</p><h2>Helgens utvalgte</h2></div><a href="#inspirasjon">Se alle turer <span>→</span></a></div>
+      <div class="trail-grid">
+        <article class="trail-card trail-large"><img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1000&q=85" alt="Tursti gjennom grønne fjell"><div class="trail-overlay"><span class="difficulty">Middels</span><h3>Romsdalseggen</h3><p>12 km · 6–8 timer</p></div></article>
+        <article class="trail-card"><img src="https://images.unsplash.com/photo-1551524164-687a55dd1126?auto=format&fit=crop&w=700&q=85" alt="Fjell med tåke og skog"><div class="trail-overlay"><span class="difficulty">Rolig</span><h3>Nordmarka rundt</h3><p>9 km · 3 timer</p></div></article>
+        <aside class="ad-space"><span class="ad-label">Annonseplass</span><div class="ad-icon">◌</div><h3>Plass til en<br>relevant partner</h3><p>Synlig, ryddig og<br>naturnært.</p><a href="#">Bli annonsør →</a></aside>
+      </div>
+    </section>
+  </main>
+  <footer><a class="brand" href="#top"><span class="brand-mark">↗</span><span>stifinn</span></a><span>Turplanlegging med litt bedre timing.</span><span>© 2026 Stifinn</span></footer>
+</body>
+</html>
