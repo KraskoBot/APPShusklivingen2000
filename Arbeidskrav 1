@@ -1,6 +1,6 @@
 Arbeids krav
 Leksjon 1
-5
+// 5
 Prompt
 Teksten (instruksjonen, spørsmålet eller konteksten) du sender inn til en AI-modell for å få et svar eller en handling tilbake. 
 Kan være alt fra ett enkelt spørsmål til en lang, detaljert instruks med eksempler og regler.
@@ -41,6 +41,197 @@ Model Context Protocol (MCP)
 En åpen standard (laget av Anthropic) som definerer hvordan AI-modeller kan koble seg til eksterne datakilder og verktøy 
 — f.eks. filsystemer, databaser, Slack, Google Drive — på en enhetlig måte. 
 I stedet for at hver integrasjon må bygges fra bunnen, kan verktøy og AI-agenter "snakke" med hverandre via samme protokoll.
+
 6
+// SDD or spec driven development 
+// Prompt to Claude 
+// this is a list of funnctional requirements and not quite the descriptive SDD 
+
+# Spec-Driven Development (SDD) Requirements
+## Hiking Trip Planning & Community Webpage
+
+**Document purpose:** This document defines the functional and non-functional specifications for the hiking webpage prior to implementation. Each requirement is written to be testable and unambiguous, per SDD practice — implementation should be traceable back to a specific requirement ID.
+
+---
+
+## 1. Scope
+
+The webpage enables users to:
+1. Plan hikes with time and weather considerations
+2. Engage socially with other hikers
+3. View advertisements in designated spaces
+
+Out of scope for this spec: mobile native apps, offline GPS tracking, payment processing (unless advertising requires it — see Section 5).
+
+---
+
+## 2. Functional Requirements
+
+### 2.1 Trip Planning
+
+| ID | Requirement |
+|---|---|
+| FR-1.1 | User shall be able to create a new trip plan with a name, date, and destination/trail. |
+| FR-1.2 | System shall allow the user to search or select a trail from a database or map interface. |
+| FR-1.3 | System shall display estimated hike duration based on trail distance, elevation gain, and a user-selectable pace (e.g., casual/moderate/fast). |
+| FR-1.4 | User shall be able to set a planned start time and receive an estimated finish time. |
+| FR-1.5 | System shall warn the user if the estimated finish time is after sunset, based on location and date. |
+| FR-1.6 | User shall be able to save, edit, and delete trip plans. |
+| FR-1.7 | User shall be able to mark a trip plan as "completed" after the fact. |
+| FR-1.8 | System shall allow the user to add checklist items (gear, supplies) to a trip plan. |
+| FR-1.9 | User shall be able to export or share a trip plan (e.g., link, PDF, or calendar invite). |
+
+### 2.2 Weather Integration
+
+| ID | Requirement |
+|---|---|
+| FR-2.1 | System shall retrieve and display a weather forecast for the trail's location on the planned date. |
+| FR-2.2 | Weather display shall include temperature range, precipitation probability, wind speed, and sunrise/sunset times. |
+| FR-2.3 | System shall issue a visible warning if forecast conditions include severe weather (storms, extreme heat/cold, high wind) on the planned date. |
+| FR-2.4 | System shall update the forecast automatically as the trip date approaches (e.g., refresh within 72 hours of the trip). |
+| FR-2.5 | If weather data is unavailable for the selected location/date, system shall clearly indicate this rather than showing blank or stale data. |
+
+### 2.3 Time Planning
+
+| ID | Requirement |
+|---|---|
+| FR-3.1 | System shall calculate recommended departure time working backward from a desired return time. |
+| FR-3.2 | System shall account for daylight hours available on the selected date and location. |
+| FR-3.3 | User shall be able to set personal buffer time (e.g., rest stops, photo time) added to base estimates. |
+| FR-3.4 | System shall send a reminder notification (email/push, per user preference) a configurable time before the planned start. |
+
+### 2.4 Social Features
+
+| ID | Requirement |
+|---|---|
+| FR-4.1 | User shall be able to create a public or private user profile. |
+| FR-4.2 | User shall be able to make a trip plan public (invite-only, followers-only, or fully public). |
+| FR-4.3 | Other users shall be able to request to join a public trip. |
+| FR-4.4 | Trip organizer shall be able to approve/deny join requests. |
+| FR-4.5 | Users shall be able to follow other users and see their public completed/upcoming trips in a feed. |
+| FR-4.6 | Users shall be able to comment on and react to trip posts (e.g., completed hike write-ups, photos). |
+| FR-4.7 | Users shall be able to upload photos to a completed trip. |
+| FR-4.8 | System shall provide a direct messaging feature between users. |
+| FR-4.9 | System shall provide reporting/blocking functionality for abusive users or content. |
+| FR-4.10 | Users shall be able to rate and leave reviews on trails (difficulty, condition, scenery). |
+| FR-4.11 | System shall support user groups/clubs for recurring hiking communities. |
+
+### 2.5 Advertising
+
+| ID | Requirement |
+|---|---|
+| FR-5.1 | System shall reserve designated, clearly demarcated ad placement zones (e.g., banner, sidebar, native feed placements) distinct from user-generated content. |
+| FR-5.2 | Ad content shall be visually distinguishable from organic/user content (e.g., "Sponsored" or "Ad" label). |
+| FR-5.3 | System shall support both static image ads and third-party ad network integration (e.g., ad server tags). |
+| FR-5.4 | System shall allow targeted ad placement by trail region or activity type, without exposing personally identifiable user data to advertisers without consent. |
+| FR-5.5 | System shall support a premium/ad-free subscription tier that suppresses ad placements (optional — confirm with stakeholders whether monetization model includes this). |
+| FR-5.6 | Ad load shall not block or delay core page functionality (trip planning, weather data) from loading. |
+
+---
+
+## 3. Non-Functional Requirements
+
+| ID | Requirement |
+|---|---|
+| NFR-1 | Weather and trail data shall load within 2 seconds under normal network conditions. |
+| NFR-2 | System shall be responsive across desktop, tablet, and mobile browser viewports. |
+| NFR-3 | System shall comply with WCAG 2.1 AA accessibility standards. |
+| NFR-4 | User data (profiles, messages, location history) shall be encrypted at rest and in transit. |
+| NFR-5 | System shall comply with applicable privacy regulations (e.g., GDPR, CCPA) including user data export/deletion requests. |
+| NFR-6 | System shall support at minimum the two most recent versions of major browsers (Chrome, Firefox, Safari, Edge). |
+| NFR-7 | System shall degrade gracefully if the third-party weather API is unavailable (cached last-known forecast with timestamp, rather than failure). |
+| NFR-8 | Ad and tracking scripts shall be isolated (e.g., sandboxed iframes) to prevent them from affecting core site performance or security. |
+| NFR-9 | System shall log and monitor uptime, targeting a minimum of 99.5% availability. |
+
+---
+
+## 4. Data Requirements
+
+| ID | Requirement |
+|---|---|
+| DR-1 | System shall integrate with a trail database (either licensed third-party data or user-contributed trail records) including distance, elevation profile, and geolocation. |
+| DR-2 | System shall integrate with a weather API providing forecast data by geographic coordinates. |
+| DR-3 | System shall store user profile data, trip plans, social graph (follows/friends), and content (comments, photos, reviews). |
+| DR-4 | System shall maintain an audit trail for moderation actions (reports, blocks, content removal). |
+
+---
+
+## 5. Assumptions & Open Questions
+
+These should be resolved with stakeholders before or during implementation:
+
+- Is there a target advertiser type (outdoor gear brands, tourism boards, local businesses)? This affects ad targeting requirements (FR-5.4).
+- Will trail data be sourced from a licensed provider (e.g., AllTrails-style API) or crowdsourced from users?
+- Is a paid/premium tier in scope for this version, or a future phase?
+- What is the expected initial user base size (affects scalability/NFR targets)?
+- Should social features support only individual hikers, or also organizations (hiking clubs, guide companies)?
+
+---
+
+## 6. Acceptance Criteria Format (for downstream use)
+
+Each functional requirement above should be expanded into Given/When/Then acceptance criteria before development begins. Example:
+
+> **FR-2.3** — Severe weather warning
+> - Given a trip plan with a saved date and location
+> - When the forecast for that date/location includes a weather alert (storm, extreme temperature, high wind threshold)
+> - Then the system displays a visible warning banner on the trip plan page before the user can consider the plan "finalized"
+
+//Lumo promted SDD specs 
+
+## Problem
+Hikers lack reliable offline access to trail info, and groups lose
+coordination once connectivity drops on the trail.
+
+## Goals
+1. Offline-first trail discovery and navigation.
+2. Live group tracking with graceful degradation to check-in messages.
+3. Trail condition reports contributed by users (crowdsourced).
+
+## Non-goals (v1)
+- Turn-by-turn voice navigation
+- Commercial booking/reservations
+- Social feed / followers
+
+## Success metrics
+- WAU ≥ 25% of installs by month 3
+- ≥ 40% of sessions occur with no connectivity
+- Condition-report contribution rate ≥ 2% WAU
+
+## Overview
+Users can download trail map regions for offline use.
+
+## Functional requirements
+- FR-1: User selects a downloadable region by panning/zooming the map
+  and tapping "Download this area".
+- FR-2: Downloadable area is capped at 500 km² per region; UI shows a
+  live km² counter that turns red above 400 km².
+- FR-3: Regions are stored encrypted on-device; tiles expire after
+  90 days, with a visible "Map data may be stale" banner after expiry.
+- FR-4: A region download can be paused, resumed, and cancelled.
+- FR-5: Storage usage per region is shown in Downloads list; user can
+  delete regions individually.
+
+## Edge cases
+- Download interrupted by network loss → resume from last completed
+  tile batch; no duplicate work.
+- Device storage < 200 MB remaining → block download with clear message.
+- App killed mid-download → download auto-resumes on next launch.
+
+## Acceptance criteria (Gherkin)
+Feature: Offline map download
+  Scenario: Pausing a download
+    Given I am downloading the "Mount Rainier NW" region
+    When I tap pause
+    Then the progress indicator freezes at its current percentage
+    And no further tiles are fetched
+    When I tap resume
+    Then downloading continues from the paused tile batch
+
+  Scenario: Expired offline region
+    Given I downloaded a region 91 days ago
+    When I open the map with no connectivity
+    Then I see the stale-data banner
+    And map tiles still render
 
 8
