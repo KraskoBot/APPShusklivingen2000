@@ -1,0 +1,32 @@
+Arbeids krav
+Leksjon 1
+5
+Prompt
+Teksten (instruksjonen, spørsmålet eller konteksten) du sender inn til en AI-modell for å få et svar eller en handling tilbake. Kan være alt fra ett enkelt spørsmål til en lang, detaljert instruks med eksempler og regler.
+
+Token
+Den minste tekstbiten en språkmodell leser og genererer om gangen — omtrent et ord, en del av et ord, eller et tegn (f.eks. blir "chatbot" ofte delt i "chat" + "bot"). Modeller har en grense for hvor mange tokens de kan behandle samtidig ("kontekstvindu"), og API-bruk prises ofte per token.
+
+Copilot (du skrev "Kopilot")
+En AI-assistent som jobber side ved side med deg i et verktøy — mest kjent som GitHub Copilot, som foreslår kode mens du skriver i editoren. Begrepet brukes generelt om AI-assistenter integrert i produktivitetsverktøy (f.eks. Microsoft 365 Copilot).
+
+Coding Agent
+En AI som ikke bare foreslår kode, men selvstendig kan utføre hele oppgaver: skrive filer, kjøre kommandoer i terminalen, teste kode, feilsøke og gjenta prosessen til oppgaven er løst — med minimal menneskelig involvering underveis. Eksempler er Claude Code eller GitHub Copilot sin "agent mode".
+
+Agent Skill
+En pakke med instruksjoner, maler eller kunnskap som gir en AI-agent en spesifikk, gjenbrukbar ferdighet — for eksempel "lag PowerPoint-presentasjoner" eller "følg vårt firmas kodestandard". Agenten laster inn skillet når oppgaven passer, i stedet for at man må forklare alt på nytt hver gang.
+
+AI API
+Et grensesnitt (Application Programming Interface) som lar utviklere sende forespørsler til en AI-modell fra egen kode og få svar tilbake programmatisk — f.eks. Anthropics eller OpenAIs API, som brukes til å bygge egne apper på toppen av en modell.
+
+AI SDK
+Et Software Development Kit — et bibliotek/verktøysett i et bestemt programmeringsspråk (Python, JavaScript osv.) som gjør det enklere å bruke et AI API. I stedet for å skrive rå HTTP-forespørsler selv, bruker man ferdige funksjoner SDK-et tilbyr.
+
+AI CLI
+Et Command Line Interface — et verktøy man styrer AI gjennom terminalen/kommandolinjen, ofte for utviklingsoppgaver. Claude Code er et eksempel: du skriver kommandoer eller instruksjoner i terminalen, og AI-en utfører oppgaver direkte i prosjektet ditt.
+
+Model Context Protocol (MCP)
+En åpen standard (laget av Anthropic) som definerer hvordan AI-modeller kan koble seg til eksterne datakilder og verktøy — f.eks. filsystemer, databaser, Slack, Google Drive — på en enhetlig måte. I stedet for at hver integrasjon må bygges fra bunnen, kan verktøy og AI-agenter "snakke" med hverandre via samme protokoll.
+6
+
+8
