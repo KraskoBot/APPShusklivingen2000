@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TiU – finn turer, hytter og fellesskap i norsk natur.">
+  <title>TiU — Finn din neste tur</title>
+  <style>
+    :root {
+      --ink: #18332d;
+      --muted: #71847e;
+      --line: #dfe8e2;
+      --paper: #f8fbf8;
+      --white: #ffffff;
+      --forest: #155f4a;
+      --forest-dark: #0c4336;
+      --mint: #dff3e7;
+      --sand: #f5efe3;
+      --sun: #f2ba55;
+      --coral: #e8715f;
+      --blue: #a6d6d8;
+      --shadow: 0 14px 40px rgba(25, 61, 51, .09);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(223, 232, 226, .86);
+      background: rgba(248, 251, 248, .9);
+      backdrop-filter: blur(18px);
+    }
+    .nav {
+      width: min(1240px, calc(100% - 40px));
+      min-height: 76px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      font-size: 1.25rem;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px 12px 12px 4px;
+      color: var(--white);
+      background: var(--forest);
+      transform: rotate(-8deg);
+      font-size: 1.05rem;
+    }
+    .brand-mark span { transform: rotate(8deg); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: #506a61;
+      font-size: .9rem;
+      font-weight: 650;
+    }
+    .nav-links a:first-child { color: var(--forest); }
+    .nav-links a:hover { color: var(--forest); }
+    .nav-actions { display: flex; align-items: center; gap: 11px; }
+    .icon-button, .avatar {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--white);
+      color: var(--ink);
+    }
+    .avatar {
+      border: 0;
+      color: var(--white);
+      background: #de8b56;
+      font-weight: 800;
+      font-size: .8rem;
+    }
+    .button {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 17px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 750;
+      font-size: .88rem;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary {
+      color: var(--white);
+      background: var(--forest);
+      box-shadow: 0 7px 18px rgba(21, 95, 74, .18);
+    }
+    .button-primary:hover { background: var(--forest-dark); }
+    .button-light { color: var(--forest); background: var(--mint); }
+    .button-ghost { color: var(--forest); background: transparent; border: 1px solid var(--line); }
+
+    main { width: min(1240px, calc(100% - 40px)); margin: auto; }
+    .hero {
+      padding: 68px 0 30px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--forest);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 27px;
+      height: 2px;
+      background: var(--sun);
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 620px;
+      margin: 17px 0 18px;
+      font-size: clamp(2.75rem, 6vw, 5.35rem);
+      line-height: .98;
+      letter-spacing: -.075em;
+      font-weight: 850;
+    }
+    .hero-copy {
+      max-width: 510px;
+      color: #60766e;
+      font-size: 1.08rem;
+    }
+    .hero-actions { display: flex; gap: 12px; margin-top: 27px; flex-wrap: wrap; }
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 25px;
+      color: var(--muted);
+      font-size: .79rem;
+    }
+    .mini-avatars { display: flex; }
+    .mini-avatars span {
+      width: 27px;
+      height: 27px;
+      display: grid;
+      place-items: center;
+      margin-left: -7px;
+      border: 2px solid var(--paper);
+      border-radius: 50%;
+      color: var(--white);
+      font-size: .62rem;
+      font-weight: 800;
+    }
+    .mini-avatars span:first-child { margin-left: 0; background: #7f9b8b; }
+    .mini-avatars span:nth-child(2) { background: #d89062; }
+    .mini-avatars span:nth-child(3) { background: #7999ae; }
+    .mini-avatars span:nth-child(4) { background: var(--forest); }
+
+    .hero-art {
+      min-height: 330px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      background: #d4e8dc;
+      box-shadow: var(--shadow);
+    }
+    .hero-art::before, .hero-art::after {
+      content: "";
+      position: absolute;
+      bottom: -6%;
+      border-radius: 50% 50% 0 0;
+      transform: rotate(-12deg);
+    }
+    .hero-art::before {
+      width: 78%;
+      height: 74%;
+      left: -15%;
+      background: #a8c8b3;
+    }
+    .hero-art::after {
+      width: 81%;
+      height: 80%;
+      right: -19%;
+      background: #74a58e;
+      transform: rotate(16deg);
+    }
+    .sun {
+      position: absolute;
+      top: 34px;
+      right: 17%;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #f6cd76;
+      box-shadow: 0 0 0 14px rgba(246, 205, 118, .16);
+    }
+    .mountain {
+      position: absolute;
+      z-index: 2;
+      bottom: -35px;
+      left: 12%;
+      width: 80%;
+      height: 70%;
+      background: #366f62;
+      clip-path: polygon(0 100%, 32% 23%, 45% 46%, 58% 8%, 100% 100%);
+    }
+    .mountain::after {
+      content: "";
+      position: absolute;
+      inset: 19% 39% auto 49%;
+      height: 26%;
+      background: #e8f0e6;
+      clip-path: polygon(0 0, 50% 100%, 100% 0, 70% 25%, 50% 0, 25% 25%);
+    }
+    .hero-art-label {
+      position: absolute;
+      z-index: 4;
+      right: 23px;
+      bottom: 21px;
+      padding: 9px 13px;
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 10px;
+      color: var(--white);
+      background: rgba(24, 51, 45, .46);
+      backdrop-filter: blur(8px);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .explorer {
+      margin-top: 32px;
+      padding-bottom: 80px;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+    .section-head h2 {
+      margin: 5px 0 0;
+      font-size: clamp(1.55rem, 3vw, 2.2rem);
+      line-height: 1.05;
+      letter-spacing: -.05em;
+    }
+    .section-head p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 8px 6px 17px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--white);
+      box-shadow: 0 6px 18px rgba(25, 61, 51, .04);
+    }
+    .search-icon { color: var(--forest); font-size: 1.1rem; }
+    .search-box input {
+      min-width: 180px;
+      flex: 1;
+      border: 0;
+      outline: 0;
+      color: var(--ink);
+      background: transparent;
+      font-size: .9rem;
+    }
+    .search-box input::placeholder { color: #9aaba3; }
+    .search-box .button { padding: 10px 15px; }
+    .explorer-tabs {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 15px;
+      overflow: auto;
+      scrollbar-width: none;
+    }
+    .explorer-tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex: 0 0 auto;
+      padding: 9px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      color: #72857e;
+      font-size: .8rem;
+      font-weight: 750;
+    }
+    .tab.active { border-color: var(--forest); color: var(--white); background: var(--forest); }
+    .explorer-grid {
+      display: grid;
+      grid-template-columns: 1.48fr .82fr;
+      min-height: 570px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .map-panel {
+      position: relative;
+      min-height: 570px;
+      overflow: hidden;
+      background: #e6efe7;
+    }
+    .map-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .55;
+      background:
+        linear-gradient(31deg, transparent 0 39%, rgba(255,255,255,.75) 40% 41%, transparent 42%),
+        linear-gradient(143deg, transparent 0 49%, rgba(255,255,255,.68) 50% 51%, transparent 52%),
+        repeating-linear-gradient(89deg, transparent 0 59px, rgba(112, 157, 130, .12) 60px 61px),
+        repeating-linear-gradient(0deg, transparent 0 72px, rgba(112, 157, 130, .10) 73px 74px);
+    }
+    .water {
+      position: absolute;
+      width: 37%;
+      height: 112%;
+      left: -4%;
+      top: -4%;
+      border-radius: 48% 62% 53% 40%;
+      background: #c6e3e2;
+      transform: rotate(12deg);
+    }
+    .contour {
+      position: absolute;
+      border: 1px solid rgba(82, 133, 104, .22);
+      border-radius: 48%;
+      transform: rotate(-18deg);
+    }
+    .contour.one { width: 55%; height: 38%; left: 22%; top: 12%; }
+    .contour.two { width: 48%; height: 31%; left: 24%; top: 16%; }
+    .contour.three { width: 63%; height: 42%; left: 38%; top: 51%; }
+    .route {
+      position: absolute;
+      z-index: 2;
+      height: 5px;
+      border-radius: 8px;
+      background: var(--coral);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.75);
+      transform-origin: left center;
+    }
+    .route.main { width: 57%; left: 22%; top: 58%; transform: rotate(-27deg); }
+    .route.main::before {
+      content: "";
+      position: absolute;
+      left: 35%;
+      top: 0;
+      width: 42%;
+      height: 100%;
+      background: #edaa53;
+      transform: rotate(12deg);
+      transform-origin: left center;
+    }
+    .route.branch { width: 29%; left: 55%; top: 39%; transform: rotate(72deg); background: #8ba96d; }
+    .marker {
+      position: absolute;
+      z-index: 4;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--white);
+      border-radius: 50% 50% 50% 3px;
+      color: var(--white);
+      background: var(--forest);
+      box-shadow: 0 3px 12px rgba(25, 61, 51, .25);
+      transform: rotate(-45deg);
+      font-size: .72rem;
+    }
+    .marker span { transform: rotate(45deg); }
+    .marker.green { left: 72%; top: 28%; }
+    .marker.orange { left: 29%; top: 57%; background: var(--coral); }
+    .marker.blue { left: 48%; top: 70%; background: #5e91a0; }
+    .map-chip {
+      position: absolute;
+      z-index: 5;
+      top: 18px;
+      left: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 10px;
+      color: var(--forest);
+      background: rgba(255,255,255,.86);
+      box-shadow: 0 5px 15px rgba(25, 61, 51, .08);
+      font-size: .78rem;
+      font-weight: 750;
+    }
+    .map-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); }
+    .map-controls {
+      position: absolute;
+      z-index: 5;
+      right: 18px;
+      top: 18px;
+      display: flex;
+      gap: 6px;
+    }
+    .map-control {
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 9px;
+      color: var(--forest);
+      background: rgba(255,255,255,.86);
+      font-weight: 800;
+    }
+    .map-legend {
+      position: absolute;
+      z-index: 5;
+      left: 18px;
+      bottom: 18px;
+      display: flex;
+      gap: 13px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 10px;
+      background: rgba(255,255,255,.84);
+      color: #60766e;
+      font-size: .7rem;
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .legend-line { width: 17px; height: 3px; border-radius: 4px; background: var(--coral); }
+    .legend-line.green { background: #8ba96d; }
+
+    .trip-detail {
+      padding: 25px 25px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .detail-top { display: flex; justify-content: space-between; align-items: start; gap: 15px; }
+    .detail-label {
+      color: var(--coral);
+      font-size: .7rem;
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .trip-detail h3 {
+      margin: 7px 0 4px;
+      font-size: 1.6rem;
+      letter-spacing: -.05em;
+      line-height: 1.05;
+    }
+    .save {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--forest);
+      background: var(--white);
+      font-size: 1rem;
+    }
+    .location { color: var(--muted); font-size: .8rem; }
+    .trip-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 18px 0;
+      margin: 17px 0 19px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .stat { padding-right: 7px; border-right: 1px solid var(--line); }
+    .stat:last-child { border: 0; }
+    .stat strong { display: block; margin-bottom: 3px; font-size: 1rem; }
+    .stat span { color: var(--muted); font-size: .68rem; }
+    .detail-heading { margin-bottom: 10px; font-size: .77rem; font-weight: 800; }
+    .date-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: .78rem;
+    }
+    .date-row:last-child { border: 0; }
+    .date-row span { color: var(--muted); }
+    .status { display: inline-flex; align-items: center; gap: 5px; color: var(--forest) !important; font-weight: 750; }
+    .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #56aa72; }
+    .status.waiting { color: #a96d25 !important; }
+    .status.waiting::before { background: var(--sun); }
+    .weather {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-top: auto;
+      padding: 13px;
+      border-radius: 12px;
+      background: #f5f8f1;
+      font-size: .75rem;
+    }
+    .weather-icon { font-size: 1.5rem; }
+    .weather strong { display: block; font-size: .84rem; }
+    .weather span { color: var(--muted); }
+    .trip-detail > .button { margin-top: 15px; width: 100%; }
+
+    .below-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 22px;
+    }
+    .info-card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--white);
+    }
+    .info-card h3 { margin: 0; font-size: 1.15rem; letter-spacing: -.035em; }
+    .card-top { display: flex; align-items: start; justify-content: space-between; gap: 15px; margin-bottom: 18px; }
+    .card-top a { color: var(--forest); font-size: .77rem; font-weight: 800; }
+    .event-list { display: grid; gap: 13px; }
+    .event {
+      display: grid;
+      grid-template-columns: 45px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .event:last-child { padding-bottom: 0; border: 0; }
+    .event-date {
+      padding: 6px 4px;
+      border-radius: 9px;
+      text-align: center;
+      color: var(--forest);
+      background: var(--mint);
+      font-size: .67rem;
+      font-weight: 850;
+      line-height: 1.1;
+    }
+    .event-date strong { display: block; font-size: 1.05rem; }
+    .event-title { margin-bottom: 2px; font-size: .81rem; font-weight: 800; }
+    .event-meta { color: var(--muted); font-size: .69rem; }
+    .spots { color: var(--forest); font-size: .7rem; font-weight: 800; white-space: nowrap; }
+    .ad-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--forest-dark);
+      color: var(--white);
+    }
+    .ad-card::after {
+      content: "✦";
+      position: absolute;
+      right: 20px;
+      bottom: -16px;
+      color: rgba(255,255,255,.09);
+      font-size: 9rem;
+      line-height: 1;
+    }
+    .ad-card .eyebrow { color: #bde5c9; }
+    .ad-card .eyebrow::before { background: var(--sun); }
+    .ad-card h3 { max-width: 250px; margin: 17px 0 8px; font-size: 1.55rem; line-height: 1.05; letter-spacing: -.05em; }
+    .ad-card p { max-width: 320px; margin-bottom: 20px; color: #b5d1c4; font-size: .78rem; }
+    .ad-card .button-light { position: relative; z-index: 2; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .76rem;
+    }
+    .footer-inner {
+      width: min(1240px, calc(100% - 40px));
+      min-height: 90px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .footer-links { display: flex; gap: 20px; }
+
+    @media (max-width: 900px) {
+      .nav-links { gap: 14px; }
+      .hero { grid-template-columns: 1fr; gap: 30px; padding-top: 45px; }
+      .hero-art { min-height: 270px; }
+      .explorer-grid { grid-template-columns: 1fr; }
+      .map-panel { min-height: 430px; }
+      .trip-detail { min-height: 450px; }
+    }
+    @media (max-width: 650px) {
+      .nav, main, .footer-inner { width: min(100% - 28px, 1240px); }
+      .site-header { position: static; }
+      .nav { min-height: 68px; }
+      .nav-links { display: none; }
+      .nav-actions .button-ghost { display: none; }
+      .hero { padding: 38px 0 20px; }
+      h1 { font-size: 3.35rem; }
+      .hero-copy { font-size: .96rem; }
+      .hero-art { min-height: 215px; border-radius: 22px; }
+      .sun { width: 50px; height: 50px; top: 27px; }
+      .section-head { display: block; }
+      .search-box { margin-top: 15px; }
+      .search-box input { min-width: 0; }
+      .explorer { margin-top: 27px; padding-bottom: 45px; }
+      .explorer-grid { border-radius: 17px; }
+      .map-panel { min-height: 350px; }
+      .map-legend { max-width: calc(100% - 36px); overflow: auto; }
+      .trip-detail { padding: 21px; }
+      .below-grid { grid-template-columns: 1fr; }
+      .info-card { padding: 20px; }
+      .footer-inner { align-items: start; flex-direction: column; justify-content: center; padding: 20px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Hovedmeny">
+      <a class="brand" href="#top" aria-label="TiU forsiden">
+        <span class="brand-mark"><span>↗</span></span>
+        <span>TiU</span>
+      </a>
+      <div class="nav-links">
+        <a href="#utforsk">Utforsk</a>
+        <a href="#fellesturer">Fellesturer</a>
+        <a href="#hytter">Hytter</a>
+        <a href="#om-tiu">Om TiU</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-button" aria-label="Åpne meldinger">✉</button>
+        <a class="button button-ghost" href="#profil">Logg inn</a>
+        <a class="avatar" href="#profil" aria-label="Åpne profil">KM</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <div class="eyebrow">Turer med mening</div>
+        <h1>Ut på tur.<br><em>Samme hvor.</em></h1>
+        <p class="hero-copy">Finn nye stier, del opplevelser og bli med folk som liker å være ute like mye som deg.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#utforsk">Utforsk turer <span>→</span></a>
+          <a class="button button-light" href="#fellesturer">Se fellesturer</a>
+        </div>
+        <div class="hero-note">
+          <div class="mini-avatars" aria-hidden="true">
+            <span>AM</span><span>JS</span><span>EL</span><span>+</span>
+          </div>
+          <span>2 400 turvenner utforsker akkurat nå</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-label="Illustrasjon av fjellandskap">
+        <div class="sun"></div>
+        <div class="mountain"></div>
+        <div class="hero-art-label">Jotunheimen · 61° 38′ N</div>
+      </div>
+    </section>
+
+    <section class="explorer" id="utforsk" aria-labelledby="explorer-title">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Finn ditt neste eventyr</div>
+          <h2 id="explorer-title">Utforsk Norge</h2>
+        </div>
+        <form class="search-box" action="#utforsk" role="search">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <label for="search" class="visually-hidden">Søk etter tur, hytte eller sted</label>
+          <input id="search" type="search" placeholder="Søk etter tur, hytte eller sted">
+          <button class="button button-primary" type="submit">Søk</button>
+        </form>
+      </div>
+
+      <div class="explorer-tabs" aria-label="Filtrer innhold">
+        <a class="tab active" href="#turer">Alle</a>
+        <a class="tab" href="#turer">Turer</a>
+        <a class="tab" href="#hytter">Hytter</a>
+        <a class="tab" href="#fellesturer">Fellesturer</a>
+        <a class="tab" href="#turer">Fottur</a>
+        <a class="tab" href="#turer">Skitur</a>
+        <a class="tab" href="#turer">Sykkeltur</a>
+        <a class="tab" href="#turer">Enkel</a>
+      </div>
+
+      <div class="explorer-grid" id="turer">
+        <div class="map-panel" aria-label="Kart over populære turer i Jotunheimen">
+          <div class="water"></div>
+          <div class="contour one"></div>
+          <div class="contour two"></div>
+          <div class="contour three"></div>
+          <div class="route main"></div>
+          <div class="route branch"></div>
+          <div class="marker green"><span>⌂</span></div>
+          <div class="marker orange"><span>●</span></div>
+          <div class="marker blue"><span>★</span></div>
+          <div class="map-chip"><span class="dot"></span> 12 treff i kartet</div>
+          <div class="map-controls" aria-label="Kartkontroller">
+            <button class="map-control" aria-label="Zoom inn">+</button>
+            <button class="map-control" aria-label="Zoom ut">−</button>
+            <button class="map-control" aria-label="Finn min posisjon">⌖</button>
+          </div>
+          <div class="map-legend">
+            <span class="legend-item"><i class="legend-line"></i> Turrute</span>
+            <span class="legend-item"><i class="legend-line green"></i> Alternativ rute</span>
+          </div>
+        </div>
+
+        <aside class="trip-detail" aria-labelledby="trip-title">
+          <div class="detail-top">
+            <div>
+              <div class="detail-label">Populær akkurat nå</div>
+              <h3 id="trip-title">Besseggen rundt</h3>
+              <div class="location">Jotunheimen, Innlandet · ★ 4,9</div>
+            </div>
+            <button class="save" aria-label="Lagre Besseggen rundt som favoritt">♡</button>
+          </div>
+          <div class="trip-stats">
+            <div class="stat"><strong>14,8 km</strong><span>Lengde</span></div>
+            <div class="stat"><strong>6–8 t</strong><span>Varighet</span></div>
+            <div class="stat"><strong>Krevende</strong><span>Nivå</span></div>
+          </div>
+          <div class="detail-heading">Kommende startdatoer</div>
+          <div class="date-row">
+            <strong>30. juni 2026</strong>
+            <span class="status">8 plasser</span>
+          </div>
+          <div class="date-row">
+            <strong>12. juli 2026</strong>
+            <span class="status">3 plasser</span>
+          </div>
+          <div class="date-row">
+            <strong>Fleksibel dato</strong>
+            <span class="status waiting">Interesse</span>
+          </div>
+          <div class="weather">
+            <span class="weather-icon">☀︎</span>
+            <div><strong>18° · Sol og lett bris</strong><span>Værmelding for Gjendesheim i dag</span></div>
+          </div>
+          <a class="button button-primary" href="#fellesturer">Se turdetaljer <span>→</span></a>
+        </aside>
+      </div>
+
+      <div class="below-grid">
+        <article class="info-card" id="fellesturer">
+          <div class="card-top">
+            <div>
+              <div class="eyebrow">Bli med andre</div>
+              <h3>Fellesturer denne måneden</h3>
+            </div>
+            <a href="#fellesturer">Se alle →</a>
+          </div>
+          <div class="event-list">
+            <a class="event" href="#fellesturer">
+              <div class="event-date"><strong>18</strong>JUN</div>
+              <div><div class="event-title">Hardangervidda på langs</div><div class="event-meta">7 dager · Turleder: Ingrid S.</div></div>
+              <div class="spots">4 plasser</div>
+            </a>
+            <a class="event" href="#fellesturer">
+              <div class="event-date"><strong>27</strong>JUN</div>
+              <div><div class="event-title">Solnedgang ved Preikestolen</div><div class="event-meta">Kveldsvandring · Enkel</div></div>
+              <div class="spots">12 plasser</div>
+            </a>
+            <a class="event" href="#fellesturer">
+              <div class="event-date"><strong>04</strong>JUL</div>
+              <div><div class="event-title">Rondane hytte til hytte</div><div class="event-meta">4 dager · Fleksibel start</div></div>
+              <div class="spots">Interesse</div>
+            </a>
+          </div>
+        </article>
+        <article class="info-card ad-card" id="hytter">
+          <div class="eyebrow">For hyttefolk og arrangører</div>
+          <h3>Har du et sted å dele?</h3>
+          <p>Opprett en side for hytta di, inviter turvenner og fyll kalenderen med gode opplevelser.</p>
+          <a class="button button-light" href="#om-tiu">Les mer om TiU <span>→</span></a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="om-tiu">
+    <div class="footer-inner">
+      <span>© 2026 TiU · Turer i utvikling</span>
+      <div class="footer-links">
+        <a href="#om-tiu">Om TiU</a>
+        <a href="#profil">Min profil</a>
+        <a href="#om-tiu">Kontakt</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
