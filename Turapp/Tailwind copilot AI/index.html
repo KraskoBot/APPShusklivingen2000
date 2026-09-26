@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TiU – finn turen, møt turfolk og planlegg neste eventyr.">
+  <title>TiU | Finn turen sammen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="TiU hjem">
+      <span class="brand-mark">↗</span>
+      <span>TiU</span>
+    </a>
+    <nav class="main-nav" aria-label="Hovedmeny">
+      <a href="#utforsk">Utforsk</a>
+      <a href="#fellesturer">Fellesturer</a>
+      <a href="#fellesskap">Fellesskap</a>
+      <a href="#annonser">For annonsører</a>
+    </nav>
+    <div class="header-actions">
+      <a class="login-link" href="#registrer">Logg inn</a>
+      <a class="button button-dark button-small" href="#registrer">Bli med</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Et fellesskap for turfolk</p>
+        <h1>Finn turen.<br><em>Finn folka.</em></h1>
+        <p class="hero-text">Oppdag nye ruter, bli med på fellesturer og planlegg ditt neste eventyr – sammen med andre som liker å være ute.</p>
+        <form class="hero-search" action="#utforsk">
+          <span class="search-icon">⌕</span>
+          <input type="search" placeholder="Søk etter turer, hytter eller steder" aria-label="Søk etter turer, hytter eller steder">
+          <button class="button button-dark" type="submit">Utforsk</button>
+        </form>
+        <div class="hero-meta">
+          <span class="avatars"><i>AM</i><i>KL</i><i>SO</i><i>+</i></span>
+          <span><strong>2 400+</strong> turfolk utforsker sammen</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-photo photo-hero" role="img" aria-label="Fjellandskap ved soloppgang"></div>
+        <div class="floating-card floating-route">
+          <span class="card-icon green-icon">⌁</span>
+          <div><strong>Besseggen</strong><small>Jotunheimen · 13,7 km</small></div>
+          <span class="difficulty">Krevende</span>
+        </div>
+        <div class="floating-card floating-weather"><span>☀</span><strong>12°</strong><small>God turdag</small></div>
+      </div>
+    </section>
+
+    <section class="trust-strip">
+      <div class="section-shell trust-inner">
+        <span>Planlegg med trygghet</span><span class="trust-divider"></span>
+        <span>⌁ Oppdaterte ruter</span><span>◉ Værdata på turen</span><span>♧ Lokale turfolk</span>
+      </div>
+    </section>
+
+    <section id="utforsk" class="section-shell explore-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">Din neste tur</p><h2>Utforsk <em>mulighetene</em></h2></div>
+        <a class="text-link" href="#kart">Se kartet <span>→</span></a>
+      </div>
+      <div class="explore-grid">
+        <article class="feature-card large-feature">
+          <div class="feature-image photo-besseggen"></div>
+          <div class="feature-content"><div class="tag-row"><span class="tag tag-light">Populær nå</span><span class="rating">★ 4.9</span></div><h3>Helgetur over Besseggen</h3><p>En klassiker i Jotunheimen med storslått utsikt og frisk fjelluft.</p><div class="feature-details"><span>⌁ 13,7 km</span><span>◷ 6–8 timer</span><span>↗ Krevende</span></div></div>
+        </article>
+        <div class="small-features">
+          <article class="feature-card horizontal-card"><div class="feature-image photo-cabin"></div><div class="feature-content"><span class="tag tag-green">Hytte til hytte</span><h3>Rondane på langs</h3><p>4 dager · Middels</p><a class="arrow-link" href="#utforsk">→</a></div></article>
+          <article class="feature-card horizontal-card"><div class="feature-image photo-bike"></div><div class="feature-content"><span class="tag tag-orange">Sykkeltur</span><h3>Rallarvegen</h3><p>80 km · Lett</p><a class="arrow-link" href="#utforsk">→</a></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="fellesturer" class="group-section">
+      <div class="section-shell group-layout">
+        <div class="group-copy"><p class="eyebrow eyebrow-light">Gå sammen</p><h2>Det er bedre<br><em>på tur sammen.</em></h2><p>Finn en fellestur som passer deg, eller lag din egen. Med fleksible datoer og turfolk i nærheten er det enkelt å komme seg ut.</p><a class="button button-light" href="#registrering">Finn en fellestur <span>→</span></a></div>
+        <div class="calendar-card"><div class="calendar-top"><span>Fellesturer</span><strong>Juli 2025</strong><span>›</span></div><div class="calendar-days"><span>MA</span><span>TI</span><span>ON</span><span>TO</span><span>FR</span><span>LØ</span><span>SØ</span></div><div class="calendar-grid"><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span class="has-event">8</span><span>9</span><span>10</span><span class="has-event active">11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span class="has-event">20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span></div><div class="calendar-event"><span class="event-dot"></span><div><strong>Topptur til Gaustatoppen</strong><small>11. juli · 8 ledige plasser</small></div><span>→</span></div></div>
+      </div>
+    </section>
+
+    <section id="kart" class="section-shell map-section">
+      <div class="section-heading"><div><p class="eyebrow">Kartet er ditt</p><h2>Finn veien <em>ut</em></h2></div><p class="section-intro">Søk i tusenvis av ruter, hytter og turmål. Filtrer etter det som passer deg.</p></div>
+      <div class="map-layout"><aside class="filter-panel"><h3>Filtrer kartet</h3><label>Søk i området<input type="search" value="Jotunheimen" aria-label="Søk i området"></label><div class="filter-label">Type tur</div><label class="check"><input type="checkbox" checked> Fottur <span>248</span></label><label class="check"><input type="checkbox"> Sykkeltur <span>64</span></label><label class="check"><input type="checkbox"> Skitur <span>39</span></label><div class="filter-label">Vanskelighetsgrad</div><div class="pills"><button class="pill selected">Alle</button><button class="pill">Lett</button><button class="pill">Middels</button><button class="pill">Krevende</button></div><button class="button button-dark full-width" type="button">Oppdater kartet</button></aside><div class="map-placeholder"><div class="map-toolbar"><span class="map-result">312 turer i området</span><span class="map-control">−</span><span class="map-control">+</span><span class="map-control">⌖</span></div><div class="map-lines"><span class="route-line route-one"></span><span class="route-line route-two"></span><span class="route-line route-three"></span></div><div class="map-marker marker-one">⌁</div><div class="map-marker marker-two">⌁</div><div class="map-marker marker-three">⌁</div><div class="map-label label-one">Besseggen</div><div class="map-label label-two">Gjendesheim</div><div class="map-label label-three">Glittertind</div><div class="map-legend"><span><i class="legend-green"></i> Turrute</span><span><i class="legend-orange"></i> Fellestur</span><span>© OpenStreetMap-bidragsytere</span></div></div></div>
+    </section>
+
+    <section id="fellesskap" class="community-section"><div class="section-shell community-layout"><div><p class="eyebrow">Et aktivt fellesskap</p><h2>Del turen.<br><em>Del opplevelsen.</em></h2><p>Fra første idé til siste bilde – her kan du bli kjent med turfolk, dele erfaringer og finne inspirasjon til neste tur.</p><a class="text-link" href="#registrering">Bli en del av fellesskapet <span>→</span></a></div><div class="social-card"><div class="post-header"><span class="avatar avatar-blue">ER</span><div><strong>Elin R.</strong><small>På tur i Jotunheimen · 2 t</small></div><span class="more">•••</span></div><div class="post-photo photo-social"></div><div class="post-actions">♡ 24 <span>♧ 8 kommentarer</span><span class="save">♧</span></div><p><strong>Elin R.</strong> For en dag! Sol, vindstille og den beste utsikten vi kunne bedt om. ⛰️</p></div></div></section>
+
+    <section id="annonser" class="section-shell partner-section"><div class="partner-copy"><p class="eyebrow">For gode turer trenger godt utstyr</p><h2>Relevante tips.<br><em>Rett sted.</em></h2><p>Oppdag produkter og tjenester fra aktører som kjenner friluftsliv. TiU holder annonsene relevante, nyttige og enkle å finne.</p><a class="text-link" href="#registrering">Les mer for annonsører <span>→</span></a></div><article class="ad-card"><span class="ad-label">Anbefalt av TiU</span><div class="ad-image photo-ad"></div><div class="ad-body"><span class="tag tag-orange">Turutstyr</span><h3>Ut på tur, aldri sur</h3><p>Alt du trenger til årets fjelleventyr.</p><span class="ad-link">Se kolleksjonen →</span></div></article></section>
+
+    <section id="registrering" class="signup-section"><div class="section-shell signup-inner"><div><p class="eyebrow eyebrow-light">Klar for å komme deg ut?</p><h2>Din neste tur<br><em>starter her.</em></h2></div><div><p>Opprett en gratis profil og få tilgang til alle turer, fellesskap og verktøy.</p><a class="button button-light" href="#top">Opprett profil <span>→</span></a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="section-shell footer-grid"><div><a class="brand footer-brand" href="#top"><span class="brand-mark">↗</span><span>TiU</span></a><p>Finn turen. Finn folka.</p></div><div><h4>Utforsk</h4><a href="#utforsk">Turer</a><a href="#kart">Kart</a><a href="#fellesturer">Fellesturer</a></div><div><h4>TiU</h4><a href="#fellesskap">Om oss</a><a href="#annonser">For annonsører</a><a href="#registrering">Kontakt</a></div><div><h4>Følg oss</h4><a href="#fellesskap">Instagram</a><a href="#fellesskap">Facebook</a><a href="#fellesskap">Nyhetsbrev</a></div></div><div class="section-shell footer-bottom"><span>© 2025 TiU. Laget for turfolk.</span><span>Personvern · Vilkår</span></div></footer>
+</body>
+</html>
