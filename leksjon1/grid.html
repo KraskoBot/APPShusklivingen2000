@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: dodgerblue;
+  padding: 10px;
+}
+.container div {
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+.header {
+  background-color: #882020;
+  padding: 30px;
+  text-align: left;
+  font-size: 35px;
+}
+.title {
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border: 1px solid black;
+}
+.subhead {
+  font-size: 20px;
+  color: #555;
+  display: flex;
+  border: 1px solid black;
+}
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  gap: 10px;
+}
+body {
+  margin: 10px;
+  border: 1px solid black;
+}
+.page-content {
+margin: 50px;
+border: 1px solid black;
+}
+#content {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid black;
+}
+footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+<div class="title">
+  <h1>title</h1>
+  <div class="subhead">
+    <p>subhead</p></div>
+  <div class="menu">
+    <button>menu</button>
+    <button>menu</button>
+    <button>menu</button>
+  </div>
+</div>
+
+ <main class="page-content">  
+    <p> page-content</p>  
+<div class="button">
+    <button onclick="document.getElementById('output').innerHTML = 'Button clicked!'"><h1>button</h1> </button>
+    <button onclick="document.getElementById('output').innerHTML = 'Button clicked!'"><h1>button</h1></button>
+</div>
+
+<div id="content">
+<p>content</p>
+
+<p>content</p>
+
+    <div class="container">
+    <div>container</div>
+    <div>container</div>
+    <div>container</div>  
+    <div>container</div>
+    <div>container</div>
+    </div>
+</div>
+ </main>
+ <footer>
+    <p>footer</p>
+  </footer>
+</body>
+</html>
+
+
