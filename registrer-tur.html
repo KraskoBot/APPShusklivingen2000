@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrer ny tur</title>
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 2rem auto; }
+    label { display: block; margin-top: 1rem; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 0.4rem; box-sizing: border-box; }
+    .feilmelding { color: crimson; font-size: 0.85rem; min-height: 1.1em; }
+    button { margin-top: 1.5rem; padding: 0.6rem 1.2rem; }
+  </style>
+</head>
+<body>
+
+  <h1>Registrer ny tur</h1>
+
+  <form id="turskjema" novalidate>
+    <label for="turnavn">Navn på tur</label>
+    <input type="text" id="turnavn" name="turnavn" required minlength="3" maxlength="100">
+    <div class="feilmelding" id="feil-turnavn"></div>
+
+    <label for="startdato">Startdato</label>
+    <input type="date" id="startdato" name="startdato" required min="2026-01-01">
+    <div class="feilmelding" id="feil-startdato"></div>
+
+    <label for="sluttdato">Sluttdato</label>
+    <input type="date" id="sluttdato" name="sluttdato" required>
+    <div class="feilmelding" id="feil-sluttdato"></div>
+
+    <label for="vanskelighet">Vanskelighetsgrad</label>
+    <select id="vanskelighet" name="vanskelighet" required>
+      <option value="">Velg...</option>
+      <option value="lett">Lett</option>
+      <option value="middels">Middels</option>
+      <option value="krevende">Krevende</option>
+    </select>
+    <div class="feilmelding" id="feil-vanskelighet"></div>
+
+    <label for="maksdeltakere">Maks antall deltakere</label>
+    <input type="number" id="maksdeltakere" name="maksdeltakere" required min="1" max="50">
+    <div class="feilmelding" id="feil-maksdeltakere"></div>
+
+    <label for="beskrivelse">Beskrivelse</label>
+    <textarea id="beskrivelse" name="beskrivelse" rows="4" maxlength="1000"></textarea>
+
+    <button type="submit">Registrer tur</button>
+    <div id="status" class="feilmelding"></div>
+  </form>
+
+  <script src="skjema-validering.js"></script>
+  <script>
+    const startInput = document.getElementById("startdato");
+    const sluttInput = document.getElementById("sluttdato");
+
+    // JS-validering: sluttdato må være etter startdato.
+    // Dette kan ikke uttrykkes med rene HTML5-attributter,
+    // fordi det avhenger av verdien i et annet felt.
+    // sjekker datoene hver gang man skriver i feltene
+    sluttInput.addEventListener("input", () => {
+      sjekkDatoIntervall(startInput, sluttInput, "feil-sluttdato");
+    });
+    startInput.addEventListener("input", () => {
+      sjekkDatoIntervall(startInput, sluttInput, "feil-sluttdato");
+    });
+
+    document.getElementById("turskjema").addEventListener("submit", (e) => {
+      e.preventDefault(); // stopper siden fra å laste på nytt
+
+      // sjekker datoene en siste gang før vi evt. godtar skjemaet
+      sjekkDatoIntervall(startInput, sluttInput, "feil-sluttdato");
+
+      if (!e.target.checkValidity()) {
+        e.target.reportValidity(); // viser feilene til brukeren
+        return;
+      }
+
+      // ingen server enda, bare viser at det funket
+      document.getElementById("status").textContent = "Skjemaet er gyldig!";
+      document.getElementById("status").style.color = "green";
+    });
+  </script>
+
+</body>
+</html>

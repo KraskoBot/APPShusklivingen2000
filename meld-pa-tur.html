@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Meld deg på tur</title>
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 2rem auto; }
+    label { display: block; margin-top: 1rem; font-weight: bold; }
+    input, select { width: 100%; padding: 0.4rem; box-sizing: border-box; }
+    .feilmelding { color: crimson; font-size: 0.85rem; min-height: 1.1em; }
+    button { margin-top: 1.5rem; padding: 0.6rem 1.2rem; }
+  </style>
+</head>
+<body>
+
+  <h1>Meld deg på tur</h1>
+
+  <!-- data-maks-plasser simulerer en verdi hentet fra databasen når
+       siden ble generert av serveren (f.eks. via en backend-mal) -->
+  <form id="pameldingsskjema" novalidate data-maks-plasser="5">
+    <label for="navn">Fullt navn</label>
+    <input type="text" id="navn" name="navn" required minlength="2" maxlength="100">
+    <div class="feilmelding" id="feil-navn"></div>
+
+    <label for="epost">E-post</label>
+    <input type="email" id="epost" name="epost" required>
+    <div class="feilmelding" id="feil-epost"></div>
+
+    <label for="telefon">Telefonnummer</label>
+    <input type="tel" id="telefon" name="telefon" required
+           pattern="[0-9]{8}" title="Skriv inn 8 siffer, uten mellomrom">
+    <div class="feilmelding" id="feil-telefon"></div>
+
+    <label for="tur">Velg tur</label>
+    <select id="tur" name="tur" required>
+      <option value="">Velg...</option>
+      <option value="1">Besseggen – 12. juli</option>
+      <option value="2">Preikestolen – 3. august</option>
+      <option value="3">Trolltunga – 20. august</option>
+    </select>
+    <div class="feilmelding" id="feil-tur"></div>
+
+    <label for="antall">Antall personer (inkl. deg selv)</label>
+    <input type="number" id="antall" name="antall" required min="1" max="20">
+    <div class="feilmelding" id="feil-antall"></div>
+
+    <button type="submit">Meld på</button>
+    <div id="status" class="feilmelding"></div>
+  </form>
+
+  <script src="skjema-validering.js"></script>
+  <script>
+    const skjema = document.getElementById("pameldingsskjema");
+    const antallInput = document.getElementById("antall");
+    const passordFritt = true; // (ikke i bruk her, bare for lesbarhet)
+    const maksPlasser = parseInt(skjema.dataset.maksPlasser, 10);
+
+    // JS-validering: antall påmeldte kan ikke overstige ledige plasser.
+    // Dette krever logikk/data (maksPlasser) som HTML-attributter alene
+    // ikke kan uttrykke.
+    // sjekker antall hver gang brukeren endrer feltet
+    antallInput.addEventListener("input", () => {
+      sjekkAntallPlasser(antallInput, maksPlasser, "feil-antall");
+    });
+
+    skjema.addEventListener("submit", (e) => {
+      e.preventDefault(); // stopper siden fra å laste på nytt
+
+      sjekkAntallPlasser(antallInput, maksPlasser, "feil-antall");
+
+      if (!e.target.checkValidity()) {
+        e.target.reportValidity(); // viser feilene til brukeren
+        return;
+      }
+
+      // ingen server enda, bare viser at det funket
+      document.getElementById("status").textContent = "Skjemaet er gyldig!";
+      document.getElementById("status").style.color = "green";
+    });
+  </script>
+
+</body>
+</html>
