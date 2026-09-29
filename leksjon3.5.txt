@@ -1,7 +1,0 @@
-Leksjon 3.5
-JS vs TS
-Fordelen med typescript over javascript er at feil i dataen blir plukket opp tidligere enn i javascript. Man får en mye «enklere» datastruktur å jobbe med fordi den er bedre definert. Typescript gir en bedre ramme for hele datastrukturen.
-Ulempene er at du må gjøre mer arbeid i forveien, med andre ord må du bruke mer tid på oppsettet for å gjøre ting enklere i fremtiden. Du må skrive mer kode og må også sørge for at konfigurasjon av filer som tsconfig.json er satt opp riktig.
-Testing
-Koden kan testes på flere måter og to av disee ble gjort via kommandoene –-noEmit og kjøring av filen med npx tsx. noEmit ble brukt til å typesjekke filen, slik at man er sikker på at de hardkodete dataene stemmer med interfacene som er definert. Kjøring av filen med npx tsx viste heller ingen feil og filen kjørte showCabin funksjonen i terminalen med forventet resultat.
-
