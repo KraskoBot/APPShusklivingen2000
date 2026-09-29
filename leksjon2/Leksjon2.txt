@@ -1,4 +1,0 @@
-Leksjon 2.4
-De to skjemaene registrer tur og meld på tur bruker klientside inndatavalidering. Dette er ikke tilstrekkelig for noe som skal bli satt i produksjon på grunn av sikkerhetsmessige problemer. Brukeren kan skru av javascript eller også endre html via for eksempel devTools. Det vil også være mulig å sende data til serveren uten å bruke skjemaet. Klientside validering er for at brukeren skal få en bedre opplevelse, men er ikke nok for et helt system. Validering må skje på nytt i backend og man bør også sørge for å sikre seg mot SQL injections via prepared statements.
-
-
